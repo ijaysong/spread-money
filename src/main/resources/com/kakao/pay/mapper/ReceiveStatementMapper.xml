@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kakao.pay.mapper.ReceiveStatementMapper">
+
+	<resultMap type="ReceiveStatement" id="receiveSmt">
+		<id property="id" column="id"/>
+		<result property="token" column="token"/>
+		<result property="receiveIndex" column="receive_index"/>
+		<result property="receiveMoney" column="receive_money"/>
+		<result property="receiveUserId" column="receive_user_id"/>
+	</resultMap>
+	
+	<insert id="insertReceiveStatementInfo" parameterType="java.util.List">
+		INSERT INTO kakao_pay.RECEIVE_STATEMENT
+		(
+			TOKEN
+			, RECEIVE_INDEX
+			, RECEIVE_MONEY
+		)
+		VALUES
+		<foreach collection="list" item="item" separator=",">
+		(
+			#{item.token}
+			, #{item.receiveIndex}
+			, #{item.receiveMoney}
+		)
+		</foreach>
+	</insert>
+	
+</mapper>
