@@ -56,20 +56,12 @@ public class SpreadRestController {
 	
 	@GetMapping("/inquiry/token/{token}")
 	public ResponseEntity<InquiryReponseDto> inquiry(@RequestHeader("X-USER-ID") int userId,
-			@PathVariable("token") String token) {
+			@PathVariable("token") String token) throws Exception {
 		
 		logger.info("조회 API 시작");
 		
-		ResponseEntity<InquiryReponseDto> entity;
-		
-		try {
-			InquiryReponseDto result = service.getInquiry(userId, token);
-			entity = new ResponseEntity<InquiryReponseDto>(result, HttpStatus.OK);
-			
-		}catch(Exception e) {
-			InquiryReponseDto result = new InquiryReponseDto();
-			entity = new ResponseEntity<InquiryReponseDto>(result, HttpStatus.BAD_REQUEST);
-		}
+		InquiryReponseDto result = service.getInquiry(userId, token);
+		ResponseEntity<InquiryReponseDto> entity = new ResponseEntity<InquiryReponseDto>(result, HttpStatus.OK);
 		
 		logger.info("조회 API 종료");
 		
