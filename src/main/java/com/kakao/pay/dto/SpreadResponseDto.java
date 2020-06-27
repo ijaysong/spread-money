@@ -1,8 +1,11 @@
 package com.kakao.pay.dto;
 
+/*
+ * 뿌리기 API의 Response API
+ */
 public class SpreadResponseDto {
 	
-	private String token;
+	private String token; // 토큰
 
 	public String getToken() {
 		return token;

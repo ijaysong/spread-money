@@ -1,12 +1,15 @@
 package com.kakao.pay.domain;
 
+/**
+ * 받기 내역에 대한 정보를 담는 클래스
+ */
 public class ReceiveStatement {
 
-	private int id;
-	private String token;
-	private int receiveIndex;
-	private int receiveMoney;
-	private int receiveUserId;
+	private int id; // ID
+	private String token; // 토큰
+	private int receiveIndex; // 뿌릴 인원에 대한 인덱스
+	private int receiveMoney; // 뿌릴 금액(1/n)
+	private int receiveUserId; // 받은 사용자 ID
 	
 	public int getId() {
 		return id;

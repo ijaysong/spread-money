@@ -1,8 +1,11 @@
 package com.kakao.pay.dto;
 
+/*
+ * 받기 API의 Response DTO
+ */
 public class ReceiveReponseDto {
 
-	private int receivedMoney;
+	private int receivedMoney; // 받은 금액
 
 	public int getReceivedMoney() {
 		return receivedMoney;

@@ -11,6 +11,15 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class ExceptionAdvice {
  
+	/**
+	 * 예외 처리 핸들러
+	 * 
+	 * @param request 리퀘스트
+	 * @param response 리스폰스
+	 * @param handler 핸들러
+	 * @param exception 예외
+	 * @return
+	 */
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> excpetionHandler(HttpServletRequest request
                                    , HttpServletResponse response

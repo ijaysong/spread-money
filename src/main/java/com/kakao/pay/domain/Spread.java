@@ -1,13 +1,16 @@
 package com.kakao.pay.domain;
 
+/**
+ * 뿌리기에 대한 정보를 담는 클래스
+ */
 public class Spread {
 
-	private int id;
-	private String token;
-	private int spreadUserId;
-	private String chatRoomId;
-	private String spreadTime;
-	private int spreadTotalMoney;
+	private int id; // ID
+	private String token; // 토큰
+	private int spreadUserId; // 뿌리기 한 사람의 ID
+	private String chatRoomId; // 채팅방 ID
+	private String spreadTime; // 뿌린 시간
+	private int spreadTotalMoney; // 뿌린 금액
 	
 	public int getId() {
 		return id;
