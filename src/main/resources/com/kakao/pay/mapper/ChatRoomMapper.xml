@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kakao.pay.mapper.ChatRoomMapper">
+
+	<resultMap type="ChatRoom" id="chatRoom">
+		<id property="id" column="id"/>
+		<result property="chatRoomId" column="chat_room_id"/>
+		<result property="userId" column="user_id"/>
+	</resultMap>
+
+	<select id="findByChatRoomId" parameterType="string" resultType="ChatRoom">
+		SELECT
+			CHAT_ROOM_ID
+			, USER_ID
+		FROM
+			kakao_pay.CHAT_ROOM
+		WHERE
+			CHAT_ROOM_ID = #{chatRoomId}
+	</select>
+</mapper>

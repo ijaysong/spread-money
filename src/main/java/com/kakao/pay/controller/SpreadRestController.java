@@ -42,11 +42,12 @@ public class SpreadRestController {
 	
 	@PostMapping("/receiving/token/{token}")
 	public ResponseEntity<ReceiveReponseDto> receive(@RequestHeader("X-USER-ID") int userId,
-			@PathVariable("token") String token) {
+			@RequestHeader("X-ROOM-ID") String chatRoomId,
+			@PathVariable("token") String token) throws Exception {
 		
 		logger.info("받기 API 시작");
 		
-		ReceiveReponseDto result = service.allocateMoney(userId, token);
+		ReceiveReponseDto result = service.allocateMoney(userId, chatRoomId, token);
 		ResponseEntity<ReceiveReponseDto> entity = new ResponseEntity<>(result, HttpStatus.OK);
 		
 		logger.info("받기 API 종료");

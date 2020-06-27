@@ -42,4 +42,28 @@
 			RECEIVE_USER_ID IS NOT NULL
 	</select>
 	
+	<select id="findByToken" resultType="ReceiveStatement">
+		SELECT
+			TOKEN
+			, RECEIVE_INDEX
+			, RECEIVE_MONEY
+			, RECEIVE_USER_ID
+		FROM
+			kakao_pay.RECEIVE_STATEMENT
+		WHERE
+			TOKEN = #{token}
+	</select>
+	
+	<update id="updateReceiveUserId">
+		UPDATE kakao_pay.RECEIVE_STATEMENT
+		SET
+			RECEIVE_USER_ID = #{userId}
+		WHERE
+			TOKEN = #{token}
+		AND
+			RECEIVE_INDEX = #{receiveIndex}
+		AND
+			RECEIVE_USER_ID IS NULL
+	</update>
+	
 </mapper>
