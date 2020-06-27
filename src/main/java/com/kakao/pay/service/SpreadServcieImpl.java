@@ -1,7 +1,9 @@
 package com.kakao.pay.service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +13,7 @@ import com.kakao.pay.domain.ReceiveStatement;
 import com.kakao.pay.domain.Spread;
 import com.kakao.pay.dto.InquiryReponseDto;
 import com.kakao.pay.dto.ReceiveReponseDto;
+import com.kakao.pay.dto.ReceivedUserDto;
 import com.kakao.pay.dto.SpreadResponseDto;
 import com.kakao.pay.mapper.ReceiveStatementMapper;
 import com.kakao.pay.mapper.SpreadMapper;
@@ -57,12 +60,12 @@ public class SpreadServcieImpl implements SpreadService {
 	
 	private String decideToken() { 
 		String token;
-		boolean result;
+		Spread result;
 		
 		do {
 			token = TokenCreator.createToken();
-			result = spreadMapper.selectTokenExistence(token);
-		} while (result);
+			result = spreadMapper.findByToken(token);
+		} while (result != null);
 		
 		return token;
 	}
@@ -104,9 +107,40 @@ public class SpreadServcieImpl implements SpreadService {
 		return null;
 	}
 
-	public InquiryReponseDto getInquiry(int userId, String token) {
-		// TODO Auto-generated method stub
-		return null;
+	public InquiryReponseDto getInquiry(int userId, String token) throws Exception {
+		
+		// 조회
+		Spread spread = spreadMapper.findByToken(token);
+		if (spread.getSpreadUserId() != userId) {
+			throw new Exception("뿌린 사람 자신만 조회를 할 수 있습니다.");
+		}
+		
+		LocalDateTime today = LocalDateTime.now();
+		LocalDateTime spreadTime = LocalDateTime.parse(spread.getSpreadTime());
+		if (spreadTime.plusDays(7).isAfter(today)) {
+			throw new Exception("뿌린건에 대한 조회는 7일 동안 할 수 있습니다.");
+		}
+		
+		List<ReceiveStatement> newReceiveSmtList = receiveStatementMapper.findByTokenAndReceiveUserId(token);
+		List<ReceivedUserDto> ruDtoList = newReceiveSmtList.stream()
+			.map(rs -> {
+				ReceivedUserDto rsDto = new ReceivedUserDto();
+				rsDto.setReceivedMoney(rs.getReceiveMoney());
+				rsDto.setUserId(rs.getReceiveUserId());
+				return rsDto;
+			}).collect(Collectors.toList());
+		
+		int receivedTotalMoney = newReceiveSmtList.stream()
+				.mapToInt(rs -> rs.getReceiveMoney())
+				.sum();
+		
+		InquiryReponseDto inquiryDto = new InquiryReponseDto();
+		inquiryDto.setReceivedTotalMoney(receivedTotalMoney);
+		inquiryDto.setReceivedUserList(ruDtoList);
+		inquiryDto.setSpreadMoney(spread.getSpreadTotalMoney());
+		inquiryDto.setSpreadTime(spread.getSpreadTime());
+		
+		return inquiryDto;
 	}
 
 

@@ -29,13 +29,19 @@
 		)
 	</insert>
 	
-	<select id="selectTokenExistence" resultType="Boolean">
+	<select id="findByToken" resultType="spread">
 		SELECT
-			COUNT(1)
+			ID
+			, TOKEN
+			, SPREAD_USER_ID
+			, CHAT_ROOM_ID
+			, SPREAD_TIME
+			, SPREAD_TOTAL_MONEY
 		FROM
 			kakao_pay.SPREAD
 		WHERE
 			TOKEN = #{token}
 	</select>
+	
 	
 </mapper>

@@ -1,7 +1,5 @@
 package com.kakao.pay.controller;
 
-import java.util.Map;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,8 +60,16 @@ public class SpreadRestController {
 		
 		logger.info("조회 API 시작");
 		
-		InquiryReponseDto result = service.getInquiry(userId, token);
-		ResponseEntity<InquiryReponseDto> entity = new ResponseEntity<InquiryReponseDto>(result, HttpStatus.OK);
+		ResponseEntity<InquiryReponseDto> entity;
+		
+		try {
+			InquiryReponseDto result = service.getInquiry(userId, token);
+			entity = new ResponseEntity<InquiryReponseDto>(result, HttpStatus.OK);
+			
+		}catch(Exception e) {
+			InquiryReponseDto result = new InquiryReponseDto();
+			entity = new ResponseEntity<InquiryReponseDto>(result, HttpStatus.BAD_REQUEST);
+		}
 		
 		logger.info("조회 API 종료");
 		

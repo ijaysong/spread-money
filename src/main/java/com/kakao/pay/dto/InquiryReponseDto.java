@@ -40,11 +40,11 @@ public class InquiryReponseDto {
 	public void setReceivedUserList(List<ReceivedUserDto> receivedUserList) {
 		this.receivedUserList = receivedUserList;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "InquiryStatusDto [spreadTime=" + spreadTime + ", spreadMoney=" + spreadMoney + ", receivedTotalMoney="
-				+ receivedTotalMoney + ", receivedUserList=" + receivedUserList + "]";
+		return "InquiryReponseDto [spreadTime=" + spreadTime + ", spreadMoney=" + spreadMoney
+				+ ", receivedTotalMoney=" + receivedTotalMoney + ", receivedUserList=" + receivedUserList + "]";
 	}
-	
+
 }

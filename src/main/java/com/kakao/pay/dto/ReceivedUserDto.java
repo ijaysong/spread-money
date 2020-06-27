@@ -3,7 +3,7 @@ package com.kakao.pay.dto;
 public class ReceivedUserDto {
 	
 	private int receivedMoney;
-	private String userId;
+	private int userId;
 	
 	public int getReceivedMoney() {
 		return receivedMoney;
@@ -13,11 +13,11 @@ public class ReceivedUserDto {
 		this.receivedMoney = receivedMoney;
 	}
 	
-	public String getUserId() {
+	public int getUserId() {
 		return userId;
 	}
-	
-	public void setUserId(String userId) {
+
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 

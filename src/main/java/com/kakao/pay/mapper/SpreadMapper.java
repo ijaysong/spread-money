@@ -9,7 +9,5 @@ public interface SpreadMapper {
 
 	void insertSpreadInfo(Spread newSpread);
 
-	boolean selectTokenExistence(String token);
-
-	
+	Spread findByToken(String token);
 }

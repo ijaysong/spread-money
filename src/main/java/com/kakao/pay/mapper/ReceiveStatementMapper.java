@@ -10,4 +10,6 @@ import com.kakao.pay.domain.ReceiveStatement;
 public interface ReceiveStatementMapper {
 
 	void insertReceiveStatementInfo(List<ReceiveStatement> receiveSmtList);
+
+	List<ReceiveStatement> findByTokenAndReceiveUserId(String token);
 }
