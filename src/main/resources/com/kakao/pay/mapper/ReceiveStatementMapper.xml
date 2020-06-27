@@ -66,4 +66,8 @@
 			RECEIVE_USER_ID IS NULL
 	</update>
 	
+	<delete id="removeAll">
+		DELETE FROM kakao_pay.RECEIVE_STATEMENT
+	</delete>
+	
 </mapper>

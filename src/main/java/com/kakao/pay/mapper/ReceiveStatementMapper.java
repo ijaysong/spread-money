@@ -17,4 +17,6 @@ public interface ReceiveStatementMapper {
 	boolean updateReceiveUserId(String token, int receiveIndex, int userId);
 
 	List<ReceiveStatement> findByToken(String token);
+
+	void removeAll();
 }

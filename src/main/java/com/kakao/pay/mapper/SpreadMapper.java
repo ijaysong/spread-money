@@ -10,4 +10,6 @@ public interface SpreadMapper {
 	void insertSpreadInfo(Spread newSpread);
 
 	Spread findByToken(String token);
+
+	void removeAll();
 }

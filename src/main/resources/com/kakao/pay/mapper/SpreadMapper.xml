@@ -43,5 +43,8 @@
 			TOKEN = #{token}
 	</select>
 	
+	<delete id="removeAll">
+		DELETE FROM kakao_pay.SPREAD
+	</delete>
 	
 </mapper>
