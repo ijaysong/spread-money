@@ -34,6 +34,8 @@ public class SpreadServcieImpl implements SpreadService {
 	@Autowired
 	private ChatRoomMapper chatRoomMapper;
 	
+	private static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+	
 	@Transactional
 	public SpreadResponseDto issueToken(int userId, String chatRoomId, int spreadTotalMoney, int spreadTotalNum) {
 		// 토큰 생성
@@ -133,9 +135,8 @@ public class SpreadServcieImpl implements SpreadService {
 		
 		// 뿌린 건은 10분만 유효함
 		LocalDateTime today = LocalDateTime.now();
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-		LocalDateTime spreadTime = LocalDateTime.parse(spread.getSpreadTime(), formatter);
-		if (spreadTime.plusMinutes(10).isAfter(today)) {
+		LocalDateTime spreadTime = LocalDateTime.parse(spread.getSpreadTime(), DATETIME_FORMATTER);
+		if (spreadTime.plusMinutes(10).isBefore(today)) {
 			throw new Exception("뿌린건에 대한 받기는 10분 동안 유효합니다.");
 		}
 		
@@ -172,8 +173,8 @@ public class SpreadServcieImpl implements SpreadService {
 		}
 		
 		LocalDateTime today = LocalDateTime.now();
-		LocalDateTime spreadTime = LocalDateTime.parse(spread.getSpreadTime());
-		if (spreadTime.plusDays(7).isAfter(today)) {
+		LocalDateTime spreadTime = LocalDateTime.parse(spread.getSpreadTime(), DATETIME_FORMATTER);
+		if (spreadTime.plusDays(7).isBefore(today)) {
 			throw new Exception("뿌린건에 대한 조회는 7일 동안 할 수 있습니다.");
 		}
 		
