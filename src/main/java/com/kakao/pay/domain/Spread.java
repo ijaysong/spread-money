@@ -5,7 +5,7 @@ public class Spread {
 	private int id;
 	private String token;
 	private int spreadUserId;
-	private int chatRoomId;
+	private String chatRoomId;
 	private String spreadTime;
 	private int spreadTotalMoney;
 	
@@ -33,11 +33,11 @@ public class Spread {
 		this.spreadUserId = spreadUserId;
 	}
 	
-	public int getChatRoomId() {
+	public String getChatRoomId() {
 		return chatRoomId;
 	}
 	
-	public void setChatRoomId(int chatRoomId) {
+	public void setChatRoomId(String chatRoomId) {
 		this.chatRoomId = chatRoomId;
 	}
 	

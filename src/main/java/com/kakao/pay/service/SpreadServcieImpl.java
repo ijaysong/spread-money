@@ -35,7 +35,7 @@ public class SpreadServcieImpl implements SpreadService {
 	private ChatRoomMapper chatRoomMapper;
 	
 	@Transactional
-	public SpreadResponseDto issueToken(int userId, int chatRoomId, int spreadTotalMoney, int spreadTotalNum) {
+	public SpreadResponseDto issueToken(int userId, String chatRoomId, int spreadTotalMoney, int spreadTotalNum) {
 		// 토큰 생성
 		String token = decideToken();
 		

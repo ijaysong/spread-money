@@ -26,7 +26,7 @@ public class SpreadRestController {
 	
 	@PostMapping("/spreading/money/{money}/num/{num}")
 	public ResponseEntity<SpreadResponseDto> spread(@RequestHeader("X-USER-ID") int userId, 
-			@RequestHeader("X-ROOM-ID") int chatRoomId,
+			@RequestHeader("X-ROOM-ID") String chatRoomId,
 			@PathVariable("money") int spreadTotalMoney,
 			@PathVariable("num") int spreadTotalNum) {
 		
